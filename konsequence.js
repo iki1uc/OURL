@@ -1,20 +1,19 @@
 // konsequence.js
-// Konsequenz = Energie, die nicht gestoppt werden kann
+// Konsequenz = Feuerbildung + Evolution
 
-const { MANA, AURA, VECTOR_ENERGIE } = require("./brand");
+const { FEUERBILDUNG } = require("./feuerbildung");
+const { ENERGY } = require("./energy");
 
 function KONSEQUENCE(qi, iqq) {
-    const mana = MANA(qi, iqq);
-    const aura = AURA(qi, iqq);
-    const vector = VECTOR_ENERGIE(qi, iqq);
+    const feuer = FEUERBILDUNG(qi, iqq);
+    const energy = ENERGY(qi, iqq);
 
-    const kon = mana + aura + vector;
+    const kon = feuer.feuer + energy.total;
 
     return {
         typ: "KONSEQUENCE",
-        mana,
-        aura,
-        vector,
+        feuer: feuer.feuer,
+        energie: energy.total,
         kon,
         ausgang: kon
     };
