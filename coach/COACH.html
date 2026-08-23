@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>🧠 COACH · Humanistischer Agent</title>
+<style>
+  :root {
+    --bg: #0a0a12;
+    --fg: #0f0;
+    --gold: #ffaa00;
+    --blue: #4af;
+    --red: #f44;
+    --green: #4f4;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Georgia', serif;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .container {
+    max-width: 800px;
+    width: 100%;
+    background: rgba(10,10,20,0.9);
+    border: 1px solid #2a2a4a;
+    border-radius: 20px;
+    padding: 30px;
+  }
+  h1 { 
+    font-size: 28px; 
+    background: linear-gradient(90deg, var(--gold), var(--green), var(--blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+  }
+  .input-area {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+  }
+  .input-area input {
+    flex: 1;
+    background: #111;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: inherit;
+  }
+  .input-area button {
+    background: var(--gold);
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  .input-area button:hover { background: #ffcc44; }
+  
+  .solution-box {
+    background: #0a0a12;
+    border: 1px solid #2a2a4a;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 15px;
+  }
+  .solution-box .area { color: var(--gold); font-weight: bold; font-size: 20px; }
+  .solution-box .issue { color: var(--red); font-size: 18px; margin: 8px 0; }
+  .solution-box .help { color: var(--green); font-size: 16px; }
+  
+  .aemter-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 12px 0;
+  }
+  .aemter-list .amt {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 13px;
+  }
+  .aemter-list .amt .name { color: var(--blue); font-weight: bold; }
+  .aemter-list .amt .contact { color: #888; font-size: 11px; }
+  
+  .steps { 
+    margin: 12px 0; 
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #ccc;
+  }
+  .resources { 
+    background: #0a0a12; 
+    border-left: 3px solid var(--gold);
+    padding: 10px 15px;
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  .resources .label { color: var(--gold); font-weight: bold; }
+  
+  .status-bar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    padding: 10px;
+    background: #0a0a12;
+    border-radius: 8px;
+    border: 1px solid #1a1a2a;
+    font-size: 12px;
+    color: #666;
+  }
+  .status-bar .sense { color: var(--green); }
+  
+  .quick-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .quick-actions button {
+    background: #111;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: 0.3s;
+  }
+  .quick-actions button:hover { border-color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🧠 COACH · Humanistischer Agent</h1>
+  <p style="text-align:center;color:#888;font-size:14px;margin:8px 0;">
+    Sag mir dein Problem – ich zeige dir den Weg.
+  </p>
+
+  <div class="input-area">
+    <input type="text" id="problemInput" placeholder="z.B. 'Ich brauche Hilfe bei Wohnen' oder 'Ich habe Schulden'">
+    <button id="solveBtn">▶ Lösungen</button>
+  </div>
+
+  <div class="quick-actions">
+    <button data-problem="Wohnung finden">🏠 Wohnung</button>
+    <button data-problem="Arbeitslos">💼 Arbeit</button>
+    <button data-problem="Krankheit">❤️ Gesundheit</button>
+    <button data-problem="Schulden">💰 Finanzen</button>
+    <button data-problem="Familie">👨‍👩‍👧 Familie</button>
+  </div>
+
+  <div id="solutionOutput">
+    <div class="solution-box">
+      <p style="color:#666;text-align:center;font-size:16px;">
+        💡 Beschreibe dein Problem oder wähle eine Kategorie.<br>
+        Ich finde die richtigen Ämter, Schritte und Hilfe für dich.
+      </p>
+    </div>
+  </div>
+
+  <div class="status-bar" id="statusBar">
+    <span class="sense">● Sense: bereit</span>
+    <span>|</span>
+    <span id="focusDisplay">Fokus: —</span>
+    <span>|</span>
+    <span>COACH · Humanistisch · Lösung</span>
+  </div>
+</div>
+
+<script type="module">
+// ─── COACH KERNEL ────────────────────────────────────────────
+const COACH = {
+  status: "bereit",
+  focus: null,
+  solution: null,
+  
+  areas: {
+    wohnen: {
+      label: "🏠 Wohnen",
+      issues: ["Miete", "Wohnung", "Schimmel", "Kündigung", "Umzug", "Wohnungssuche", "Mieter"],
+      help: ["Mietberatung", "Wohnungsamt", "Sozialhilfe", "Mieterverein"]
+    },
+    arbeit: {
+      label: "💼 Arbeit",
+      issues: ["Arbeitslos", "Bewerbung", "Kündigung", "Job", "Mobbing", "Überforderung", "Arbeitsamt"],
+      help: ["Arbeitsamt", "Jobcenter", "Bewerbungscoaching", "Rechtsberatung"]
+    },
+    gesundheit: {
+      label: "❤️ Gesundheit",
+      issues: ["Krankheit", "Psychisch", "Sucht", "Pflege", "Krankenkasse", "Arzt", "Depression"],
+      help: ["Krankenkasse", "Sozialpsychiatrie", "Suchtberatung", "Pflegestützpunkt"]
+    },
+    finanzen: {
+      label: "💰 Finanzen",
+      issues: ["Schulden", "ALG II", "Bürgergeld", "Steuern", "Kredite", "Geld", "Finanzamt"],
+      help: ["Schuldnerberatung", "Jobcenter", "Finanzamt", "Verbraucherzentrale"]
+    },
+    familie: {
+      label: "👨‍👩‍👧 Familie",
+      issues: ["Kinderbetreuung", "Sorgerecht", "Gewalt", "Trennung", "Altersvorsorge", "Kind", "Eltern"],
+      help: ["Jugendamt", "Familienberatung", "Hilfetelefon", "Sozialamt"]
+    }
+  },
+
+  aemter: {
+    jobcenter: { label: "🏛️ Jobcenter", contact: "Terminvereinbarung", tasks: ["ALG II", "Bür

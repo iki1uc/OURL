@@ -1,0 +1,144 @@
+// COACH – Humanistischer Lebens-Agent
+// CLOSED · NO-CLONE · BUSINESS
+
+const COACH = {
+  // ─── AGENT STATUS ──────────────────────────────────────────
+  status: "bereit",
+  focus: null,
+  solution: null,
+  
+  // ─── LEBENSBEREICHE (real) ────────────────────────────────
+  areas: {
+    wohnen: {
+      label: "🏠 Wohnen",
+      issues: ["Miete zu hoch", "Wohnungssuche", "Schimmel", "Kündigung", "Umzug"],
+      help: ["Mietberatung", "Wohnungsamt", "Sozialhilfe", "Mieterverein"]
+    },
+    arbeit: {
+      label: "💼 Arbeit & Job",
+      issues: ["Arbeitslosigkeit", "Bewerbung", "Kündigung", "Mobbing", "Überforderung"],
+      help: ["Arbeitsamt", "Jobcenter", "Bewerbungscoaching", "Rechtsberatung"]
+    },
+    gesundheit: {
+      label: "❤️ Gesundheit",
+      issues: ["Krankheit", "Psychische Belastung", "Suchthilfe", "Pflege", "Krankenkasse"],
+      help: ["Krankenkasse", "Sozialpsychiatrie", "Suchtberatung", "Pflegestützpunkt"]
+    },
+    finanzen: {
+      label: "💰 Finanzen",
+      issues: ["Schulden", "ALG II", "Bürgergeld", "Steuern", "Kredite"],
+      help: ["Schuldnerberatung", "Jobcenter", "Finanzamt", "Verbraucherzentrale"]
+    },
+    familie: {
+      label: "👨‍👩‍👧‍👦 Familie & Soziales",
+      issues: ["Kinderbetreuung", "Sorgerecht", "Gewalt", "Trennung", "Altersvorsorge"],
+      help: ["Jugendamt", "Familienberatung", "Hilfetelefon", "Sozialamt"]
+    }
+  },
+
+  // ─── ÄMTER-ACHSE ────────────────────────────────────────────
+  aemter: {
+    jobcenter: { label: "🏛️ Jobcenter", contact: "Terminvereinbarung", tasks: ["ALG II", "Bürgergeld", "Eingliederung"] },
+    arbeitsamt: { label: "🏛️ Arbeitsamt", contact: "Online-Portal", tasks: ["Arbeitslosengeld", "Weiterbildung", "Vermittlung"] },
+    wohnungsamt: { label: "🏛️ Wohnungsamt", contact: "Stadtverwaltung", tasks: ["Wohnberechtigungsschein", "Sozialwohnung"] },
+    jugendamt: { label: "🏛️ Jugendamt", contact: "Telefon + Beratung", tasks: ["Kinderbetreuung", "Sorgerecht", "Hilfe"] },
+    sozialamt: { label: "🏛️ Sozialamt", contact: "Persönlich oder Online", tasks: ["Sozialhilfe", "Grundsicherung"] },
+    gesundheitsamt: { label: "🏛️ Gesundheitsamt", contact: "Termin", tasks: ["Impfung", "Gesundheitszeugnis", "Hygiene"] },
+    finanzamt: { label: "🏛️ Finanzamt", contact: "Online + Telefon", tasks: ["Steuererklärung", "Steuer-ID", "Freistellungsauftrag"] },
+    auslaenderbehoerde: { label: "🏛️ Ausländerbehörde", contact: "Termin", tasks: ["Aufenthaltstitel", "Einbürgerung", "Fiktionsbescheinigung"] },
+    rentenversicherung: { label: "🏛️ Rentenversicherung", contact: "Online + Telefon", tasks: ["Rentenantrag", "Kontenklärung"] }
+  },
+
+  // ─── PROBLEM-LÖSUNG ──────────────────────────────────────
+  solve(problem) {
+    const match = this.matchProblem(problem);
+    if (!match) return this.fallback(problem);
+    
+    const solution = {
+      area: match.area,
+      issue: match.issue,
+      help: match.help,
+      aemter: this.findAemter(match.area),
+      steps: this.generateSteps(match),
+      resources: this.findResources(match)
+    };
+    
+    this.solution = solution;
+    this.focus = match.area;
+    return solution;
+  },
+
+  matchProblem(input) {
+    const lower = input.toLowerCase();
+    for (const [key, area] of Object.entries(this.areas)) {
+      for (const issue of area.issues) {
+        if (lower.includes(issue.toLowerCase())) {
+          return { area: key, issue, help: area.help };
+        }
+      }
+    }
+    return null;
+  },
+
+  findAemter(areaKey) {
+    const mapping = {
+      wohnen: ["wohnungsamt", "sozialamt"],
+      arbeit: ["jobcenter", "arbeitsamt"],
+      gesundheit: ["gesundheitsamt", "krankenkasse"],
+      finanzen: ["finanzamt", "jobcenter"],
+      familie: ["jugendamt", "sozialamt"]
+    };
+    const keys = mapping[areaKey] || [];
+    return keys.map(k => this.aemter[k]).filter(Boolean);
+  },
+
+  generateSteps(match) {
+    return [
+      `1️⃣ Erste Anlaufstelle: ${match.help[0]} kontaktieren`,
+      `2️⃣ Unterlagen vorbereiten: Personalausweis, Nachweise`,
+      `3️⃣ Termin vereinbaren (Telefon oder Online)`,
+      `4️⃣ Beratung wahrnehmen und Lösung erarbeiten`,
+      `5️⃣ Falls nötig: Folge-Termin oder Antrag stellen`
+    ];
+  },
+
+  findResources(match) {
+    return {
+      hotline: "☎️ 0800 123 4567 (kostenlos)",
+      online: `🌐 www.${match.area}-hilfe.de`,
+      vorort: `📍 Nächste Beratungsstelle für ${match.area}`,
+      notfall: "⚠️ Bei akuter Krise: 112 oder 110"
+    };
+  },
+
+  fallback(input) {
+    return {
+      status: "🔍 Unklar",
+      message: "Ich habe dein Problem nicht eindeutig erkannt. Bitte beschreibe es genauer.",
+      help: "Du kannst auch sagen: 'Ich brauche Hilfe bei Wohnen / Arbeit / Gesundheit / Finanzen / Familie'",
+      aemter: [],
+      steps: ["1️⃣ Problem klar beschreiben", "2️⃣ Bereich wählen", "3️⃣ Hilfe holen"]
+    };
+  },
+
+  // ─── KERNEL-INTERFACE (7SENSE kompatibel) ──────────────
+  sense() {
+    const states = {
+      ghost: "Problem nicht erkannt",
+      help: "Hilfe wird benötigt",
+      error: "Problem dringend",
+      miss: "Information fehlt",
+      fit: "Lösung in Arbeit",
+      fin: "Problem gelöst",
+      rdy: "Bereit für nächste Hilfe",
+      bioldung: "Lösung wird aufgebaut"
+    };
+    return {
+      state: this.solution ? "fit" : "rdy",
+      description: states[this.solution ? "fit" : "rdy"] || "Bereit"
+    };
+  }
+};
+
+// ─── EXPORT (für deine Engine) ─────────────────────────────
+export { COACH };
