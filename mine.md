@@ -1,17 +1,17 @@
-# mine.md — persönliche Sicht & Optionen
+# mine.md — persönliche Sicht & Optionlichkeiten
 
 ## 1. Meine Sicht (Zoom)
-Ich wähle selbst:
-- [3×3]   kleine Sicht
-- [9×9]   mittlere Sicht
-- [81]    volle Sicht
-- [243]   tiefste Sicht
+Ich wähle:
+- [3×3](ca://s?q=3x3_Zoom_erklaeren)
+- [9×9](ca://s?q=9x9_Zoom_erklaeren)
+- [81](ca://s?q=81er_Sicht_erklaeren)
+- [243](ca://s?q=243_Zoom_erklaeren)
 
-## 2. Meine Optionlichkeiten (Buch / Weg-Buch / Option)
+## 2. Meine Optionlichkeiten
 Für jedes Feld:
-- Buch        = behalten
-- Weg-Buch    = löschen
-- Option      = später entscheiden
+- Buch        → behalten
+- Weg-Buch    → löschen
+- Option      → später entscheiden
 
 ## 3. Meine Themen
 - Kinder-Themen
@@ -21,35 +21,25 @@ Für jedes Feld:
 - Führung / Hilfe / Hilfend / Nutzung
 
 ## 4. Meine Entscheidungen
-Ich entscheide:
+Ich bestimme:
 - was bleibt (Buch)
 - was weg soll (Weg-Buch)
 - was offen bleibt (Option)
 
 ## 5. Meine Tune-Up-Umkehrlogik
-Ich bestimme:
-- Tiefe
-- Sicht
-- Relevanz
-- Einbindung
-System folgt mir.
+Ich entscheide → System folgt.
 
 ## 6. Meine Stabilität
-Wenn ich klar bin → 3×3
-Wenn ich unentschlossen bin → 9×9
-Wenn ich alles sehen will → 81
-Wenn ich tief sortieren will → 243
+- klar → 3×3
+- unentschlossen → 9×9
+- alles sehen → 81
+- tief sortieren → 243
 
 ## 7. Meine Ghost-Umleitung
-Nur wenn nötig:
-- Fehler → automatische Hilfe
-- Überforderung → automatische Entlastung
-- Unklarheit → Option statt Druck
+Nur bei ROT:
+- Fehler → Hilfe
+- Überforderung → Entlastung
+- Unklarheit → Option
 
 ## 8. Meine Speicherung
-Alles, was ich entscheide, wird hier abgelegt:
-- meine Sicht
-- meine Optionen
-- meine Themen
-- meine Relevanz
-- meine Buch/Weg-Buch/Option-Felder
+Alles, was ich entscheide, wird hier abgelegt.
