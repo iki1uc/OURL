@@ -1,22 +1,22 @@
 // SCHALTWERK_NC_ENGINE.js
-// Atom-Schaltwerk für org/reorg + NC + TMP + QI/IQQ
+// Positive/Negative Wellen + org/reorg + NC + TMP + QI/IQQ
 
-function ATOM_SORT(raw) {
+function WELLEN(raw) {
     return {
-        positive: raw.filter(x => x.includes("+")),
-        negative: raw.filter(x => x.includes("-"))
+        positiv: raw.filter(x => x > 0),
+        negativ: raw.filter(x => x < 0)
     };
 }
 
-function QI_SWITCH(atom) {
-    return atom.length % 9;
+function QI(welle) {
+    return Math.abs(welle) % 9;
 }
 
-function IQQ_SWITCH(atom) {
-    return atom.length % 81;
+function IQQ(welle) {
+    return Math.abs(welle) % 81;
 }
 
-function TMP_GUIDE(qi, iqq) {
+function TMP(qi, iqq) {
     return (qi + iqq) * 1.333;
 }
 
@@ -24,32 +24,49 @@ function ORG_REORG(tmp) {
     return tmp > 50 ? "ORG" : "REORG";
 }
 
-function NC_CONTINUUM(tmp, sync) {
+function TAKT(welle) {
+    return welle % 4; // 1/4-Takt
+}
+
+function EPOCHE(welle) {
+    return Math.floor(welle / 100); // Epoche
+}
+
+function SYNC(hin, zurueck) {
+    return (hin + zurueck) / 2;
+}
+
+function NC(tmp, sync) {
     return (tmp + sync) / 2;
 }
 
-function SCHALTWERK_NC_ENGINE(rawAtoms, hin, zurueck) {
-    const sorted = ATOM_SORT(rawAtoms);
+function SCHALTWERK_NC_ENGINE(wellen, hin, zurueck) {
+    const sort = WELLEN(wellen);
 
-    const qi = QI_SWITCH(sorted.positive.join(""));
-    const iqq = IQQ_SWITCH(sorted.negative.join(""));
+    const qi = QI(wellen[0] || 0);
+    const iqq = IQQ(wellen[0] || 0);
 
-    const tmp = TMP_GUIDE(qi, iqq);
-    const orgState = ORG_REORG(tmp);
+    const tmp = TMP(qi, iqq);
+    const org = ORG_REORG(tmp);
 
-    const sync = (hin + zurueck) / 2;
-    const nc = NC_CONTINUUM(tmp, sync);
+    const takt = TAKT(wellen[0] || 0);
+    const epoche = EPOCHE(wellen[0] || 0);
+
+    const sync = SYNC(hin, zurueck);
+    const nc = NC(tmp, sync);
 
     return {
         typ: "SCHALTWERK_NC_ENGINE",
-        sorted,
+        sort,
         qi,
         iqq,
         tmp,
-        orgState,
+        org,
+        takt,
+        epoche,
         sync,
         nc,
-        ausgang: orgState
+        ausgang: org
     };
 }
 
