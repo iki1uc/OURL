@@ -1,0 +1,52 @@
+// joy.js
+// LIVE-Axiom: OUR(L) erzeugt joy.live
+
+function LIVE(our, L) {
+    const stabil = our + L;
+
+    return {
+        typ: "LIVE",
+        stabil,
+        ausgang: stabil
+    };
+}
+
+function NEVER_JOY(earn) {
+    return {
+        typ: "NEVER_JOY",
+        wert: earn * 0.0,
+        ausgang: 0
+    };
+}
+
+function EN_JOY(earn, L) {
+    const joy = (earn + L) / 2;
+
+    return {
+        typ: "EN_JOY",
+        joy,
+        ausgang: joy
+    };
+}
+
+function JOY_LIVE(earn, our, L) {
+    const live = LIVE(our, L);
+    const enjoy = EN_JOY(earn, L);
+
+    const joyLive = live.stabil + enjoy.joy;
+
+    return {
+        typ: "JOY_LIVE",
+        live: live.stabil,
+        enjoy: enjoy.joy,
+        joyLive,
+        ausgang: joyLive
+    };
+}
+
+module.exports = {
+    LIVE,
+    NEVER_JOY,
+    EN_JOY,
+    JOY_LIVE
+};
