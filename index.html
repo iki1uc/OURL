@@ -80,7 +80,6 @@ body {
   margin: 3px;
 }
 .panel button:hover { background: rgba(40,80,70,0.08); color: #aaeedd; }
-.panel button.active { color: #00ff88; border-color: rgba(0,255,136,0.05); }
 .panel button.gold { color: #ffaa00; border-color: rgba(255,170,0,0.05); }
 .panel button.red { color: #ff4444; border-color: rgba(255,68,68,0.05); }
 
@@ -208,9 +207,8 @@ function runError() {
 
 // ===== 3. 7SENSE =====
 function runSense() {
-  const score = (0.6 + Math.random() * 0.4);
-  const klar = score > 0.7;
-  log(`👁️ 7SENSE · Wahrnehmung\nScore: ${score.toFixed(2)}\nStatus: ${klar ? '✅ klar' : '🔍 unscharf'}`);
+  const score = (0.6 + Math.random() * 0.4).toFixed(2);
+  log(`👁️ 7SENSE · Wahrnehmung\nScore: ${score}\nStatus: ${score > 0.7 ? '✅ klar' : '🔍 unscharf'}`);
   setStatus('agentStatus', 'SENSE');
 }
 
