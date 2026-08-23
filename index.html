@@ -1,67 +1,308 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title>Optionlichkeiten-System</title>
-    <style>
-        body { font-family: Arial; background:#f4f4f4; padding:20px; }
-        .menu { margin-bottom:20px; }
-        .menu button { padding:10px 20px; margin:5px; font-size:16px; }
-        .section { background:white; padding:20px; margin-top:20px; border-radius:8px; }
-        h2 { margin-top:0; }
-    </style>
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🧠 iki1uc · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP · 3×3 · 9×9 · 81 · 243</title>
 
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body {
+  background: #0a0a12;
+  color: #c8d0d0;
+  font-family: 'Consolas', 'Courier New', monospace;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.container {
+  max-width: 1100px;
+  width: 100%;
+  background: rgba(10,10,20,0.7);
+  border: 1px solid rgba(255,170,0,0.05);
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 60px rgba(0,0,0,0.5);
+}
+.header {
+  text-align: center;
+  border-bottom: 1px solid rgba(255,170,0,0.05);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+.header h1 {
+  font-size: 28px;
+  background: linear-gradient(90deg, #ffaa00, #ff66ff, #00ccff, #00ff88);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 4px;
+}
+.header .sub {
+  color: #445555;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+.header .sub span { color: #ffaa00; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 750px) { .grid { grid-template-columns: 1fr; } }
+
+.panel {
+  background: rgba(10,10,20,0.4);
+  border: 1px solid rgba(255,255,255,0.02);
+  border-radius: 14px;
+  padding: 16px;
+}
+.panel h2 {
+  color: #ffaa00;
+  font-size: 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+.panel button {
+  background: rgba(20,35,35,0.2);
+  color: #668888;
+  border: 1px solid rgba(255,255,255,0.02);
+  padding: 6px 14px;
+  border-radius: 18px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11px;
+  transition: all 0.3s;
+  margin: 3px;
+}
+.panel button:hover { background: rgba(40,80,70,0.08); color: #aaeedd; }
+.panel button.active { color: #00ff88; border-color: rgba(0,255,136,0.05); }
+.panel button.gold { color: #ffaa00; border-color: rgba(255,170,0,0.05); }
+.panel button.red { color: #ff4444; border-color: rgba(255,68,68,0.05); }
+
+#output {
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  padding: 14px;
+  min-height: 100px;
+  font-size: 13px;
+  line-height: 1.6;
+  border: 1px solid rgba(255,255,255,0.02);
+  margin-top: 10px;
+  white-space: pre-wrap;
+  color: #88ddbb;
+  font-family: monospace;
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 10px;
+  margin-top: 12px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 8px;
+  font-size: 10px;
+  color: #445555;
+  border: 1px solid rgba(255,255,255,0.01);
+}
+.status span { color: #88ddbb; }
+
+.footer {
+  text-align: center;
+  margin-top: 16px;
+  padding: 12px;
+  color: #222;
+  font-size: 9px;
+  letter-spacing: 2px;
+  border-top: 1px solid rgba(255,255,255,0.01);
+}
+.footer span { color: #ffaa00; }
+</style>
+</head>
 <body>
 
-    <h1>Optionlichkeiten-System</h1>
+<div class="container">
 
-    <div class="menu">
-        <h2>Sicht wählen</h2>
-        <button onclick="loadView('3x3')">3×3</button>
-        <button onclick="loadView('9x9')">9×9</button>
-        <button onclick="loadView('81')">81</button>
-        <button onclick="loadView('243')">243</button>
+<div class="header">
+  <h1>🧠 iki1uc · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP</h1>
+  <div class="sub">3×3 · 9×9 · 81 · 243 · <span>Führung & geführt werden – sowohl als auch</span></div>
+</div>
+
+<div class="grid">
+
+  <!-- ===== LINKES PANEL: SCHALTUNG ===== -->
+  <div class="panel">
+    <h2>⚡ SCHALTUNG · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP</h2>
+    <button class="gold" onclick="runHelp()">🆘 HELP</button>
+    <button class="red" onclick="runError()">⚠️ ERROR</button>
+    <button onclick="runSense()">👁️ 7SENSE</button>
+    <button onclick="runWraight()">✅ WRAIGHT</button>
+    <button class="gold" onclick="runCoach()">🧑‍🏫 COACH</button>
+    <button onclick="runTmp()">🌀 TMP</button>
+    <button onclick="runFull()">🔮 VOLLSCHALTUNG</button>
+    <button onclick="runReset()">⟲ RESET</button>
+    <div id="output">🔮 Wähle einen Modus oder klicke auf VOLLSCHALTUNG.</div>
+  </div>
+
+  <!-- ===== RECHTES PANEL: SICHT ===== -->
+  <div class="panel">
+    <h2>📐 SICHT · 3×3 · 9×9 · 81 · 243</h2>
+    <button onclick="loadView('3x3')">3×3</button>
+    <button onclick="loadView('9x9')">9×9</button>
+    <button onclick="loadView('81')">81</button>
+    <button onclick="loadView('243')">243</button>
+    <div id="viewOutput" style="background:rgba(0,0,0,0.3);border-radius:10px;padding:14px;min-height:80px;font-size:13px;line-height:1.6;border:1px solid rgba(255,255,255,0.02);margin-top:10px;color:#88ddbb;font-family:monospace;">
+      3×3 Sicht · 9 Felder · Klare Führung
     </div>
+  </div>
 
-    <div id="content" class="section">
-        <h2>Willkommen</h2>
-        <p>Wähle eine Sicht oben im Menü.</p>
-    </div>
+</div>
 
-    <script>
-        function loadView(view) {
-            let content = document.getElementById("content");
+<div class="status">
+  <span>🧠 AGENT: <span id="agentStatus">bereit</span></span>
+  <span>🌀 WRAIGHT: <span id="wraightStatus">⏳</span></span>
+  <span>🧑‍🏫 COACH: <span id="coachStatus">bereit</span></span>
+  <span>⏱️ <span id="timeStatus">00:00</span></span>
+</div>
 
-            if (view === "3x3") {
-                content.innerHTML = `
-                    <h2>3×3 Sicht</h2>
-                    <p>Kleine Sicht. Klare Führung. 9 Felder.</p>
-                `;
-            }
+<div class="footer"><span>🧠</span> iki1uc · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP · <span>wieimmer4u</span></div>
 
-            if (view === "9x9") {
-                content.innerHTML = `
-                    <h2>9×9 Sicht</h2>
-                    <p>Mittlere Sicht. 81 Felder. Für unentschlossene oder komplexe Anfragen.</p>
-                `;
-            }
+</div>
 
-            if (view === "81") {
-                content.innerHTML = `
-                    <h2>81er Vollsicht</h2>
-                    <p>Alle 81 Felder sichtbar. Buch / Weg-Buch / Option pro Feld.</p>
-                `;
-            }
+<script>
+// ============================================================
+// iki1uc · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP
+// ============================================================
 
-            if (view === "243") {
-                content.innerHTML = `
-                    <h2>243er Tiefsicht</h2>
-                    <p>Tiefste Optionlichkeiten. Nur wenn absolut notwendig.</p>
-                `;
-            }
-        }
-    </script>
+// ===== ZEIT =====
+let time = 0;
+setInterval(() => {
+  time++;
+  const s = time % 60, m = Math.floor(time / 60);
+  document.getElementById('timeStatus').textContent =
+    `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}, 1000);
+
+// ===== AUSGABE =====
+function log(msg) {
+  document.getElementById('output').textContent = msg;
+}
+
+// ===== 1. HELP =====
+function runHelp() {
+  log('🆘 HELP aktiviert\nSoforthilfe · Unterstützung · Fehlerkorrektur\nModus: "sanft" – ich höre zu und helfe.');
+  document.getElementById('agentStatus').textContent = 'HELP';
+}
+
+// ===== 2. ERROR =====
+function runError() {
+  log('⚠️ ERROR erkannt\nFehler: keiner\nStatus: "klar" – alles sauber.');
+  document.getElementById('agentStatus').textContent = 'ERROR';
+}
+
+// ===== 3. 7SENSE =====
+function runSense() {
+  const score = (0.6 + Math.random() * 0.4);
+  const klar = score > 0.7;
+  log(`👁️ 7SENSE · Wahrnehmung\nScore: ${score.toFixed(2)}\nStatus: ${klar ? '✅ klar' : '🔍 unscharf'}`);
+  document.getElementById('agentStatus').textContent = 'SENSE';
+}
+
+// ===== 4. WRAIGHT =====
+function runWraight() {
+  const erlaubt = Math.random() > 0.3;
+  const status = erlaubt ? '✅ GRÜN – Zugang erlaubt' : '⛔ ROT – Zugang blockiert';
+  log(`✅ WRAIGHT · Erlaubnis\n${status}`);
+  document.getElementById('wraightStatus').textContent = erlaubt ? '✅ GRÜN' : '⛔ ROT';
+  document.getElementById('agentStatus').textContent = 'WRAIGHT';
+}
+
+// ===== 5. COACH =====
+function runCoach() {
+  log('🧑‍🏫 COACH · Führung\nModus: "führend"\nIch führe dich – aber ich werde nicht geführt.\nNächster Schritt: TMP');
+  document.getElementById('coachStatus').textContent = 'aktiv';
+  document.getElementById('agentStatus').textContent = 'COACH';
+}
+
+// ===== 6. TMP =====
+function runTmp() {
+  log('🌀 TMP · Temporäre Brücke\nModus: "durchfluss"\nTMP leitet weiter – alles stabil.\nNächster Schritt: COACH');
+  document.getElementById('agentStatus').textContent = 'TMP';
+}
+
+// ===== 7. VOLLSCHALTUNG =====
+function runFull() {
+  const help = '🆘 HELP: aktiv (sanft)';
+  const error = '⚠️ ERROR: klar (keine Fehler)';
+  const sense = `👁️ 7SENSE: klar (${(0.7 + Math.random() * 0.3).toFixed(2)})`;
+  const wraight = Math.random() > 0.2 ? '✅ WRAIGHT: GRÜN – Zugang erlaubt' : '⛔ WRAIGHT: ROT – Zugang blockiert';
+  const coach = wraight.includes('GRÜN') ? '🧑‍🏫 COACH: führend – ich führe, werde nicht geführt' : '🧑‍🏫 COACH: blockiert – warte auf WRAIGHT';
+  const tmp = wraight.includes('GRÜN') ? '🌀 TMP: durchfluss – leitet weiter' : '🌀 TMP: pause – warte auf Korrektur';
+
+  const gesamts = wraight.includes('GRÜN') ? '✅ System aktiv – Führung möglich' : '⛔ System blockiert – Hilfe nötig';
+
+  log(
+    '🔮 VOLLSCHALTUNG · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP\n' +
+    '───────────────────────────────────────\n' +
+    help + '\n' +
+    error + '\n' +
+    sense + '\n' +
+    wraight + '\n' +
+    coach + '\n' +
+    tmp + '\n' +
+    '───────────────────────────────────────\n' +
+    '📌 Gesamtstatus: ' + gesamts
+  );
+
+  document.getElementById('wraightStatus').textContent = wraight.includes('GRÜN') ? '✅ GRÜN' : '⛔ ROT';
+  document.getElementById('coachStatus').textContent = wraight.includes('GRÜN') ? 'führend' : 'blockiert';
+  document.getElementById('agentStatus').textContent = 'VOLLSCHALTUNG';
+}
+
+// ===== RESET =====
+function runReset() {
+  log('⟲ RESET\nSystem zurückgesetzt.\nAlle Module sind bereit.');
+  document.getElementById('wraightStatus').textContent = '⏳';
+  document.getElementById('coachStatus').textContent = 'bereit';
+  document.getElementById('agentStatus').textContent = 'bereit';
+}
+
+// ===== SICHT =====
+function loadView(view) {
+  const out = document.getElementById('viewOutput');
+  const map = {
+    '3x3': '3×3 Sicht · 9 Felder · Klare Führung · Einfache Übersicht',
+    '9x9': '9×9 Sicht · 81 Felder · Mittlere Sicht · Für unentschlossene oder komplexe Anfragen',
+    '81': '81er Vollsicht · Alle 81 Felder sichtbar · Buch / Weg-Buch / Option pro Feld',
+    '243': '243er Tiefsicht · Tiefste Optionlichkeiten · Nur wenn absolut notwendig'
+  };
+  out.textContent = map[view] || 'Unbekannte Sicht';
+}
+
+// ===== TASTATUR =====
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'h' || e.key === 'H') runHelp();
+  if (e.key === 'e' || e.key === 'E') runError();
+  if (e.key === 's' || e.key === 'S') runSense();
+  if (e.key === 'w' || e.key === 'W') runWraight();
+  if (e.key === 'c' || e.key === 'C') runCoach();
+  if (e.key === 't' || e.key === 'T') runTmp();
+  if (e.key === 'f' || e.key === 'F') runFull();
+  if (e.key === 'r' || e.key === 'R') runReset();
+  if (e.key === '1') loadView('3x3');
+  if (e.key === '2') loadView('9x9');
+  if (e.key === '3') loadView('81');
+  if (e.key === '4') loadView('243');
+});
+
+// ===== INIT =====
+log('🧠 iki1uc · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP · geladen\nDrücke f für VOLLSCHALTUNG oder 1–4 für Sichten.');
+console.log('⌨️  h=HELP  e=ERROR  s=7SENSE  w=WRAIGHT  c=COACH  t=TMP  f=FULL  r=RESET  1=3×3  2=9×9  3=81  4=243');
+</script>
 
 </body>
 </html>
