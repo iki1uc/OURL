@@ -3,96 +3,124 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🧠 iki1uc · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP · 3×3 · 9×9 · 81 · 243</title>
+<title>🧠 iki1uc · HSF · MXU · COCKPIT · 9 Bewegungen · KIpi</title>
 
 <style>
+:root {
+  --bg: #0a0a12;
+  --fg: #00ff88;
+  --gold: #ffd700;
+  --sync: #4f4;
+  --os: #f44;
+  --axis: #6b6bff;
+  --meta: #ff66ff;
+  --boot: #ff8c00;
+  --core: #00ccff;
+}
 * { box-sizing:border-box; margin:0; padding:0; }
 body {
-  background: #0a0a12;
-  color: #c8d0d0;
-  font-family: 'Consolas', 'Courier New', monospace;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Consolas', monospace;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+  padding: 10px;
 }
 .container {
-  max-width: 1100px;
-  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   background: rgba(10,10,20,0.7);
   border: 1px solid rgba(255,170,0,0.05);
-  border-radius: 20px;
-  padding: 24px;
+  border-radius: 16px;
+  padding: 16px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 0 60px rgba(0,0,0,0.5);
 }
 .header {
   text-align: center;
   border-bottom: 1px solid rgba(255,170,0,0.05);
-  padding-bottom: 12px;
-  margin-bottom: 16px;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
 }
 .header h1 {
-  font-size: 28px;
+  font-size: 24px;
   background: linear-gradient(90deg, #ffaa00, #ff66ff, #00ccff, #00ff88);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
 }
 .header .sub {
   color: #445555;
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 2px;
 }
-.header .sub span { color: #ffaa00; }
+.header .sub span { color: var(--gold); }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 10px;
 }
-@media (max-width: 750px) { .grid { grid-template-columns: 1fr; } }
+@media (max-width: 850px) { .grid { grid-template-columns: 1fr; } }
 
 .panel {
   background: rgba(10,10,20,0.4);
   border: 1px solid rgba(255,255,255,0.02);
-  border-radius: 14px;
-  padding: 16px;
+  border-radius: 12px;
+  padding: 12px;
 }
 .panel h2 {
-  color: #ffaa00;
-  font-size: 16px;
+  color: var(--gold);
+  font-size: 14px;
   border-bottom: 1px solid rgba(255,255,255,0.02);
-  padding-bottom: 8px;
-  margin-bottom: 12px;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
 }
 .panel button {
   background: rgba(20,35,35,0.2);
   color: #668888;
   border: 1px solid rgba(255,255,255,0.02);
-  padding: 6px 14px;
-  border-radius: 18px;
+  padding: 4px 12px;
+  border-radius: 16px;
   cursor: pointer;
   font-family: inherit;
-  font-size: 11px;
+  font-size: 10px;
   transition: all 0.3s;
-  margin: 3px;
+  margin: 2px;
 }
 .panel button:hover { background: rgba(40,80,70,0.08); color: #aaeedd; }
-.panel button.gold { color: #ffaa00; border-color: rgba(255,170,0,0.05); }
+.panel button.gold { color: var(--gold); border-color: rgba(255,170,0,0.05); }
 .panel button.red { color: #ff4444; border-color: rgba(255,68,68,0.05); }
+.panel button.green { color: var(--fg); border-color: rgba(0,255,136,0.05); }
+.panel button.sync { color: var(--sync); border-color: rgba(68,255,68,0.05); }
+.panel button.os { color: var(--os); border-color: rgba(255,68,68,0.05); }
+.panel button.meta { color: var(--meta); border-color: rgba(255,102,255,0.05); }
+.panel button.boot { color: var(--boot); border-color: rgba(255,140,0,0.05); }
+.panel button.core { color: var(--core); border-color: rgba(0,204,255,0.05); }
 
 #output {
   background: rgba(0,0,0,0.3);
-  border-radius: 10px;
-  padding: 14px;
-  min-height: 120px;
-  font-size: 13px;
-  line-height: 1.6;
+  border-radius: 8px;
+  padding: 10px;
+  min-height: 80px;
+  font-size: 11px;
+  line-height: 1.5;
   border: 1px solid rgba(255,255,255,0.02);
-  margin-top: 10px;
+  margin-top: 8px;
   white-space: pre-wrap;
+  color: #88ddbb;
+  font-family: monospace;
+  max-height: 160px;
+  overflow-y: auto;
+}
+
+#viewOutput {
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  padding: 10px;
+  min-height: 50px;
+  font-size: 12px;
+  line-height: 1.5;
+  border: 1px solid rgba(255,255,255,0.02);
+  margin-top: 8px;
   color: #88ddbb;
   font-family: monospace;
 }
@@ -100,11 +128,11 @@ body {
 .status {
   display: flex;
   justify-content: space-between;
-  padding: 6px 10px;
-  margin-top: 12px;
+  padding: 4px 10px;
+  margin-top: 10px;
   background: rgba(0,0,0,0.2);
-  border-radius: 8px;
-  font-size: 10px;
+  border-radius: 6px;
+  font-size: 9px;
   color: #445555;
   border: 1px solid rgba(255,255,255,0.01);
 }
@@ -112,14 +140,30 @@ body {
 
 .footer {
   text-align: center;
-  margin-top: 16px;
-  padding: 12px;
+  margin-top: 12px;
+  padding: 10px;
   color: #222;
-  font-size: 9px;
+  font-size: 8px;
   letter-spacing: 2px;
   border-top: 1px solid rgba(255,255,255,0.01);
 }
-.footer span { color: #ffaa00; }
+.footer span { color: var(--gold); }
+
+#metrics { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 4px; margin-top: 6px; }
+.metric { background: #0e0e1a; border-radius: 4px; padding: 4px; text-align: center; border: 1px solid #1a1a2a; }
+.metric .label { color: #666; font-size: 7px; text-transform: uppercase; }
+.metric .value { font-size: 12px; font-weight: bold; }
+.metric.os .value { color: var(--os); }
+.metric.sync .value { color: var(--sync); }
+.metric.axis .value { color: var(--axis); }
+.metric.cover .value { color: var(--gold); }
+.metric.meta .value { color: var(--meta); }
+
+#axis-detail { font-size: 8px; color: #555; background: #06060a; border-radius: 4px; padding: 4px; max-height: 50px; overflow-y: auto; line-height: 1.3; margin-top: 4px; }
+#axis-detail .row { display: flex; justify-content: space-between; }
+#axis-detail .name { color: var(--axis); }
+#axis-detail .deg { color: #888; }
+#axis-detail .weight { color: var(--gold); }
 </style>
 </head>
 <body>
@@ -127,14 +171,15 @@ body {
 <div class="container">
 
 <div class="header">
-  <h1>🧠 iki1uc · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP</h1>
-  <div class="sub">3×3 · 9×9 · 81 · 243 · <span>Führung & geführt werden – sowohl als auch</span></div>
+  <h1>🧠 iki1uc · HSF · MXU · COCKPIT · 9 BEWEGUNGEN · KIpi</h1>
+  <div class="sub">HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP · 3×3 · 9×9 · 81 · 243 · <span>OS → BOOT → CORE → SYNC → META</span></div>
 </div>
 
 <div class="grid">
 
+  <!-- ===== LINKES PANEL: HSF + MXU ===== -->
   <div class="panel">
-    <h2>⚡ SCHALTUNG · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP</h2>
+    <h2>⚡ HSF · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP</h2>
     <button class="gold" onclick="runHelp()">🆘 HELP</button>
     <button class="red" onclick="runError()">⚠️ ERROR</button>
     <button onclick="runSense()">👁️ 7SENSE</button>
@@ -143,18 +188,50 @@ body {
     <button onclick="runTmp()">🌀 TMP</button>
     <button onclick="runFull()">🔮 VOLLSCHALTUNG</button>
     <button onclick="runReset()">⟲ RESET</button>
-    <div id="output">🔮 Wähle einen Modus oder klicke auf VOLLSCHALTUNG.</div>
+    <div id="output">🔮 Wähle einen Modus.</div>
+
+    <h2 style="margin-top:10px;">🌀 9 BEWEGUNGEN · MAIN.respo</h2>
+    <button class="green" onclick="runMove('PUSH')">PUSH</button>
+    <button class="green" onclick="runMove('PULL')">PULL</button>
+    <button onclick="runMove('SHIFT')">SHIFT</button>
+    <button onclick="runMove('FLOW')">FLOW</button>
+    <button class="red" onclick="runMove('BREAK')">BREAK</button>
+    <button onclick="runMove('SPIN')">SPIN</button>
+    <button class="gold" onclick="runMove('RISE')">RISE</button>
+    <button onclick="runMove('DROP')">DROP</button>
+    <button onclick="runMove('ROOT')">ROOT</button>
+
+    <h2 style="margin-top:10px;">🔗 KIpi.FUSION</h2>
+    <button onclick="runKIpi()">🌀 KIpi starten</button>
   </div>
 
+  <!-- ===== RECHTES PANEL: SICHT + MXU METRICS ===== -->
   <div class="panel">
     <h2>📐 SICHT · 3×3 · 9×9 · 81 · 243</h2>
     <button onclick="loadView('3x3')">3×3</button>
     <button onclick="loadView('9x9')">9×9</button>
     <button onclick="loadView('81')">81</button>
     <button onclick="loadView('243')">243</button>
-    <div id="viewOutput" style="background:rgba(0,0,0,0.3);border-radius:10px;padding:14px;min-height:80px;font-size:13px;line-height:1.6;border:1px solid rgba(255,255,255,0.02);margin-top:10px;color:#88ddbb;font-family:monospace;">
-      3×3 Sicht · 9 Felder · Klare Führung
+    <div id="viewOutput">3×3 Sicht · 9 Felder · Klare Führung</div>
+
+    <h2 style="margin-top:10px;">⚡ MXU · STATION 6.0</h2>
+    <button class="sync" onclick="activateModule('SYNC')">◈ SYNC</button>
+    <button class="os" onclick="activateModule('OS')">○ OS</button>
+    <button class="boot" onclick="activateModule('BOOT')">⏻ BOOT</button>
+    <button class="core" onclick="activateModule('CORE')">◆ CORE</button>
+    <button class="meta" onclick="activateModule('META')">✦ META</button>
+    <button class="gold" onclick="toggleMXU()">▶ START</button>
+    <button class="red" onclick="resetMXU()">⟲ RESET</button>
+    <button onclick="toggleMXUAuto()">▶ AUTO</button>
+
+    <div id="metrics">
+      <div class="metric os"><div class="label">OS</div><div class="value" id="os-value">21%</div></div>
+      <div class="metric sync"><div class="label">SYNC</div><div class="value" id="sync-value">100%</div></div>
+      <div class="metric meta"><div class="label">META</div><div class="value" id="meta-value">0%</div></div>
+      <div class="metric axis"><div class="label">ACHSEN</div><div class="value" id="axis-value">19</div></div>
+      <div class="metric cover"><div class="label">Ø WINKEL</div><div class="value" id="mode-value">--°</div></div>
     </div>
+    <div id="axis-detail"></div>
   </div>
 
 </div>
@@ -163,16 +240,17 @@ body {
   <span>🧠 AGENT: <span id="agentStatus">bereit</span></span>
   <span>🌀 WRAIGHT: <span id="wraightStatus">⏳</span></span>
   <span>🧑‍🏫 COACH: <span id="coachStatus">bereit</span></span>
+  <span>⚡ MXU: <span id="mxuStatus">⏸</span></span>
   <span>⏱️ <span id="timeStatus">00:00</span></span>
 </div>
 
-<div class="footer"><span>🧠</span> iki1uc · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP · <span>wieimmer4u</span></div>
+<div class="footer"><span>🧠</span> iki1uc · HSF · MXU · COCKPIT · 9 Bewegungen · KIpi · <span>wieimmer4u</span></div>
 
 </div>
 
 <script>
 // ============================================================
-// iki1uc · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP
+// iki1uc · HSF · MXU · COCKPIT · 9 BEWEGUNGEN · KIpi
 // ============================================================
 
 // ===== SETSTATUS =====
@@ -193,36 +271,29 @@ setInterval(() => {
   setStatus('timeStatus', `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`);
 }, 1000);
 
-// ===== 1. HELP =====
+// ============================================================
+// 1. HSF · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP
+// ============================================================
 function runHelp() {
   log('🆘 HELP aktiviert\nSoforthilfe · Unterstützung · Fehlerkorrektur\nModus: "sanft" – ich höre zu und helfe.');
   setStatus('agentStatus', 'HELP');
 }
-
-// ===== 2. ERROR =====
 function runError() {
   log('⚠️ ERROR erkannt\nFehler: keiner\nStatus: "klar" – alles sauber.');
   setStatus('agentStatus', 'ERROR');
 }
-
-// ===== 3. 7SENSE =====
 function runSense() {
   const score = (0.6 + Math.random() * 0.4).toFixed(2);
   log(`👁️ 7SENSE · Wahrnehmung\nScore: ${score}\nStatus: ${score > 0.7 ? '✅ klar' : '🔍 unscharf'}`);
   setStatus('agentStatus', 'SENSE');
 }
-
-// ===== 4. WRAIGHT =====
 function runWraight() {
   const erlaubt = Math.random() > 0.25;
-  const status = erlaubt ? 'GRÜN – Zugang erlaubt' : 'ROT – Zugang blockiert';
-  log(`✅ WRAIGHT · Erlaubnis\nStatus: ${status}`);
+  log(`✅ WRAIGHT · Erlaubnis\nStatus: ${erlaubt ? 'GRÜN – Zugang erlaubt' : 'ROT – Zugang blockiert'}`);
   setStatus('wraightStatus', erlaubt ? '✅ GRÜN' : '⛔ ROT');
   setStatus('agentStatus', 'WRAIGHT');
   return erlaubt;
 }
-
-// ===== 5. COACH =====
 function runCoach() {
   const erlaubt = runWraight();
   if (!erlaubt) {
@@ -234,42 +305,28 @@ function runCoach() {
   setStatus('coachStatus', 'aktiv');
   setStatus('agentStatus', 'COACH');
 }
-
-// ===== 6. TMP =====
 function runTmp() {
   log('🌀 TMP · Temporäre Brücke\nModus: "durchfluss"\nTMP leitet weiter – alles stabil.');
   setStatus('agentStatus', 'TMP');
 }
-
-// ===== 7. VOLLSCHALTUNG =====
 function runFull() {
   const erlaubt = runWraight();
-  const help = '🆘 HELP: aktiv (sanft)';
-  const error = '⚠️ ERROR: klar (keine Fehler)';
-  const sense = `👁️ 7SENSE: klar (${(0.7 + Math.random() * 0.3).toFixed(2)})`;
-  const coach = erlaubt ? '🧑‍🏫 COACH: führend' : '🧑‍🏫 COACH: blockiert';
-  const tmp = erlaubt ? '🌀 TMP: durchfluss' : '🌀 TMP: pause';
-  const system = erlaubt ? '✅ System aktiv – Führung möglich' : '⛔ System blockiert – Hilfe nötig';
-
   log(
     '🔮 VOLLSCHALTUNG · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP\n' +
     '───────────────────────────────────────\n' +
-    help + '\n' +
-    error + '\n' +
-    sense + '\n' +
+    '🆘 HELP: aktiv (sanft)\n' +
+    '⚠️ ERROR: klar (keine Fehler)\n' +
+    `👁️ 7SENSE: klar (${(0.7 + Math.random() * 0.3).toFixed(2)})\n` +
     `✅ WRAIGHT: ${erlaubt ? 'GRÜN' : 'ROT'}\n` +
-    coach + '\n' +
-    tmp + '\n' +
+    `${erlaubt ? '🧑‍🏫 COACH: führend' : '🧑‍🏫 COACH: blockiert'}\n` +
+    `${erlaubt ? '🌀 TMP: durchfluss' : '🌀 TMP: pause'}\n` +
     '───────────────────────────────────────\n' +
-    '📌 Gesamtstatus: ' + system
+    `📌 Gesamtstatus: ${erlaubt ? '✅ System aktiv – Führung möglich' : '⛔ System blockiert – Hilfe nötig'}`
   );
-
   setStatus('wraightStatus', erlaubt ? '✅ GRÜN' : '⛔ ROT');
   setStatus('coachStatus', erlaubt ? 'führend' : 'blockiert');
   setStatus('agentStatus', 'VOLLSCHALTUNG');
 }
-
-// ===== RESET =====
 function runReset() {
   log('⟲ RESET\nSystem zurückgesetzt.\nAlle Module sind bereit.');
   setStatus('wraightStatus', '⏳');
@@ -277,42 +334,176 @@ function runReset() {
   setStatus('agentStatus', 'bereit');
 }
 
-// ===== SICHT =====
+// ============================================================
+// 2. 9 BEWEGUNGEN · MAIN.respo
+// ============================================================
+const MOVES = {
+  PUSH: { direction: 'FORWARD', state: 'ACTIVE', respo: 'OK', axis: 'AIR', pipeline: 1 },
+  PULL: { direction: 'BACKWARD', state: 'ACTIVE', respo: 'ROOT', axis: 'AIV', pipeline: 0 },
+  SHIFT: { direction: 'SIDE', state: 'ACTIVE', respo: 'ECHO', axis: 'AIR', pipeline: 2 },
+  FLOW: { direction: 'STREAM', state: 'ACTIVE', respo: 'FLOW', axis: 'AIR', pipeline: 3 },
+  BREAK: { direction: 'STOP', state: 'HALT', respo: 'BREAK', axis: 'AIV', pipeline: 0 },
+  SPIN: { direction: 'ROTATION', state: 'ACTIVE', respo: 'VOID', axis: 'AIV', pipeline: 4 },
+  RISE: { direction: 'UP', state: 'ACTIVE', respo: 'OK', axis: 'AIR', pipeline: 4 },
+  DROP: { direction: 'DOWN', state: 'ACTIVE', respo: 'NOK', axis: 'AIV', pipeline: 1 },
+  ROOT: { direction: 'ORIGIN', state: 'STABLE', respo: 'ROOT', axis: 'AIR', pipeline: 0 }
+};
+function runMove(name) {
+  const m = MOVES[name];
+  if (!m) { log('❌ Bewegung nicht gefunden.'); return; }
+  log(`🌀 ${name}\nRichtung: ${m.direction}\nStatus: ${m.state}\nRESPO: ${m.respo}\nAchse: ${m.axis}\nPipeline: ${m.pipeline}\n✅ Bewegung ausgeführt.`);
+}
+
+// ============================================================
+// 3. KIpi.FUSION
+// ============================================================
+function runKIpi() {
+  const ursache = { kern: '◉', impuls: 3 };
+  const wirkung = { mitte: '◎', verzweig: '◆', anstieg: '△', verdichtung: '▣' };
+  const ergebnis = { r1: 81, r2: 756, r3: 27, rückkehr: '↺' };
+  const qikette = ['◉', 3, '◎', '◆', '△', '▣', 81, 756, 27, 3, '↺'];
+  log(
+    '🌀 KIpi.FUSION · Ursache → Wirkung → Ergebnis\n' +
+    '───────────────────────────────────────\n' +
+    `Ursache: Kern=${ursache.kern}, Impuls=${ursache.impuls}\n` +
+    `Wirkung: ${wirkung.mitte} ${wirkung.verzweig} ${wirkung.anstieg} ${wirkung.verdichtung}\n` +
+    `Ergebnis: ${ergebnis.r1} → ${ergebnis.r2} → ${ergebnis.r3} → ${ergebnis.rückkehr}\n` +
+    `QI-Kette: ${qikette.join(' → ')}`
+  );
+}
+
+// ============================================================
+// 4. SICHT · 3×3 · 9×9 · 81 · 243
+// ============================================================
 const views = {
   '3x3': '3×3 Sicht · 9 Felder · Klare Führung · Einfache Übersicht',
   '9x9': '9×9 Sicht · 81 Felder · Mittlere Sicht · Für unentschlossene oder komplexe Anfragen',
   '81': '81er Vollsicht · Alle 81 Felder sichtbar · Buch / Weg-Buch / Option pro Feld',
   '243': '243er Tiefsicht · Tiefste Optionlichkeiten · Nur wenn absolut notwendig'
 };
-
 function loadView(view) {
   document.getElementById('viewOutput').textContent = views[view] || 'Unbekannte Sicht';
 }
 
-// ===== TASTATUR =====
-const keys = {
-  h: runHelp,
-  e: runError,
-  s: runSense,
-  w: runWraight,
-  c: runCoach,
-  t: runTmp,
-  f: runFull,
-  r: runReset,
-  1: () => loadView('3x3'),
-  2: () => loadView('9x9'),
-  3: () => loadView('81'),
-  4: () => loadView('243')
-};
+// ============================================================
+// 5. MXU · STATION 6.0
+// ============================================================
+const ALL_AXIS_LABELS = ['B°','C°','D°','E°','F°','G°','H°','I°','J°','K°','L°','M°','N°','O°','P°','Q°','R°','S°','T°'];
+const AXIS_WEIGHTS = { 'B°':1,'C°':2,'D°':1,'E°':3,'F°':1,'G°':2,'H°':1,'I°':3,'J°':1,'K°':2,'L°':1,'M°':3,'N°':1,'O°':2,'P°':1,'Q°':3,'R°':1,'S°':2,'T°':1 };
+const AXIS_ANGLES = {};
+(function() { const step=360/ALL_AXIS_LABELS.length; for(let i=0;i<ALL_AXIS_LABELS.length;i++) AXIS_ANGLES[ALL_AXIS_LABELS[i]]=Math.round(i*step); })();
+const TOTAL_DEFINED_AXES = ALL_AXIS_LABELS.length;
+const OS_AXES = ['B°','C°','D°','E°'];
+const BOOT_AXES = ['B°','C°','D°','E°','F°','G°','H°'];
+const CORE_AXES = ['B°','C°','D°','E°','F°','G°','H°','I°','J°','K°','L°','M°'];
+const SYNC_AXES = ALL_AXIS_LABELS.slice();
+const META_AXES = ALL_AXIS_LABELS.slice();
 
+let mxuState = { running: false, autoMode: false, cycle: 0, t: 0, rotationSpeed: 6, axes: SYNC_AXES, mode: 'SYNC' };
+let mxuAutoInterval = null;
+
+function computeCoverage(activeAxes) { return (activeAxes.length / TOTAL_DEFINED_AXES) * 100; }
+function averageAngle(activeAxes, tOffsetDeg) {
+  if (activeAxes.length===0) return 0;
+  let sum=0; for(let i=0;i<activeAxes.length;i++) sum += (AXIS_ANGLES[activeAxes[i]] + tOffsetDeg) % 360;
+  return sum / activeAxes.length;
+}
+function getWeightedAverage(activeAxes, tOffsetDeg) {
+  if (activeAxes.length===0) return 0;
+  let sum=0,wsum=0;
+  for(let i=0;i<activeAxes.length;i++) {
+    const label=activeAxes[i]; const current=(AXIS_ANGLES[label]+tOffsetDeg)%360; const weight=AXIS_WEIGHTS[label]||1;
+    sum += current*weight; wsum += weight;
+  } return wsum>0 ? sum/wsum : 0;
+}
+function updateMXUMetrics() {
+  document.getElementById('os-value').textContent = computeCoverage(OS_AXES).toFixed(0)+'%';
+  document.getElementById('sync-value').textContent = computeCoverage(SYNC_AXES).toFixed(0)+'%';
+  document.getElementById('meta-value').textContent = computeCoverage(META_AXES).toFixed(0)+'%';
+  document.getElementById('axis-value').textContent = mxuState.axes.length;
+  const weighted = getWeightedAverage(mxuState.axes, mxuState.t * mxuState.rotationSpeed);
+  document.getElementById('mode-value').textContent = weighted.toFixed(0)+'°';
+  let html='';
+  for(let i=0;i<mxuState.axes.length;i++) {
+    const label=mxuState.axes[i];
+    const current=(AXIS_ANGLES[label]+mxuState.t*mxuState.rotationSpeed)%360;
+    const weight=AXIS_WEIGHTS[label]||1;
+    html += `<div class="row"><span class="name">${label}</span><span class="deg">${current.toFixed(0)}°</span><span class="weight">w${weight}</span></div>`;
+  } document.getElementById('axis-detail').innerHTML = html;
+}
+function activateModule(key) {
+  mxuState.mode = key;
+  switch(key) {
+    case 'SYNC': mxuState.axes = SYNC_AXES; log('◈ SYNC · 19/19 Achsen · 100% Abdeckung', 'sync'); break;
+    case 'OS': mxuState.axes = OS_AXES; log('○ OS · 4/19 Achsen · ' + computeCoverage(OS_AXES).toFixed(0) + '% Abdeckung', 'os'); break;
+    case 'BOOT': mxuState.axes = BOOT_AXES; log('⏻ BOOT · 7/19 Achsen · ' + computeCoverage(BOOT_AXES).toFixed(0) + '% Abdeckung', 'boot'); break;
+    case 'CORE': mxuState.axes = CORE_AXES; log('◆ CORE · 12/19 Achsen · ' + computeCoverage(CORE_AXES).toFixed(0) + '% Abdeckung', 'core'); break;
+    case 'META': mxuState.axes = META_AXES; log('✦ META · 19/19 + Gewichtung', 'meta'); break;
+  } updateMXUMetrics(); setStatus('mxuStatus', mxuState.mode);
+}
+function toggleMXU() {
+  mxuState.running = !mxuState.running;
+  document.querySelector('#metrics + button.gold').textContent = mxuState.running ? '⏸ STOP' : '▶ START';
+  setStatus('mxuStatus', mxuState.running ? '▶ läuft' : '⏸ gestoppt');
+  if (mxuState.running) {
+    const loop = () => { if (!mxuState.running) return; mxuState.t += 1/60; mxuState.cycle++; updateMXUMetrics(); requestAnimationFrame(loop); };
+    loop();
+  }
+}
+function resetMXU() {
+  mxuState.running = false; mxuState.t = 0; mxuState.cycle = 0; mxuState.axes = SYNC_AXES;
+  document.querySelector('#metrics + button.gold').textContent = '▶ START';
+  setStatus('mxuStatus', '⏸ reset');
+  activateModule('SYNC');
+}
+function toggleMXUAuto() {
+  mxuState.autoMode = !mxuState.autoMode;
+  const btn = document.querySelector('#metrics + button.gold + button + button');
+  btn.textContent = mxuState.autoMode ? '⏸ PAUSE' : '▶ AUTO';
+  if (mxuState.autoMode) {
+    mxuState.running = true;
+    document.querySelector('#metrics + button.gold').textContent = '⏸ STOP';
+    setStatus('mxuStatus', '▶ auto');
+    if (mxuAutoInterval) clearInterval(mxuAutoInterval);
+    mxuAutoInterval = setInterval(() => {
+      const mods = ['SYNC','OS','BOOT','CORE','META'];
+      activateModule(mods[Math.floor(Math.random()*mods.length)]);
+    }, 3000);
+  } else { clearInterval(mxuAutoInterval); mxuAutoInterval = null; }
+}
+
+// ============================================================
+// 6. TASTATUR
+// ============================================================
+const keys = {
+  h: runHelp, e: runError, s: runSense, w: runWraight, c: runCoach, t: runTmp, f: runFull, r: runReset,
+  1: () => loadView('3x3'), 2: () => loadView('9x9'), 3: () => loadView('81'), 4: () => loadView('243'),
+  p: () => runMove('PUSH'), u: () => runMove('PULL'), i: () => runMove('SHIFT'), l: () => runMove('FLOW'),
+  b: () => runMove('BREAK'), v: () => runMove('RISE'), d: () => runMove('DROP'), o: () => runMove('ROOT'),
+  k: runKIpi,
+  5: () => activateModule('SYNC'), 6: () => activateModule('OS'), 7: () => activateModule('BOOT'),
+  8: () => activateModule('CORE'), 9: () => activateModule('META'), a: toggleMXUAuto, x: resetMXU
+};
 document.addEventListener('keydown', (e) => {
   const fn = keys[e.key.toLowerCase()];
   if (fn) fn();
 });
 
-// ===== INIT =====
-log('🧠 iki1uc · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP · geladen\nDrücke f für VOLLSCHALTUNG oder 1–4 für Sichten.');
-console.log('⌨️  h=HELP  e=ERROR  s=7SENSE  w=WRAIGHT  c=COACH  t=TMP  f=FULL  r=RESET  1=3×3  2=9×9  3=81  4=243');
+// ============================================================
+// 7. INIT
+// ============================================================
+loadView('3x3');
+activateModule('SYNC');
+updateMXUMetrics();
+log('🧠 iki1uc · HSF · MXU · COCKPIT · geladen\n' +
+    '⌨️  h=HELP e=ERROR s=SENSE w=WRAIGHT c=COACH t=TMP f=FULL r=RESET\n' +
+    '    1=3×3 2=9×9 3=81 4=243\n' +
+    '    p=PUSH u=PULL i=SHIFT l=FLOW b=BREAK v=RISE d=DROP o=ROOT k=KIpi\n' +
+    '    5=SYNC 6=OS 7=BOOT 8=CORE 9=META a=AUTO x=RESET');
+console.log('⌨️  h=HELP e=ERROR s=SENSE w=WRAIGHT c=COACH t=TMP f=FULL r=RESET');
+console.log('    1=3×3 2=9×9 3=81 4=243');
+console.log('    p=PUSH u=PULL i=SHIFT l=FLOW b=BREAK v=RISE d=DROP o=ROOT k=KIpi');
+console.log('    5=SYNC 6=OS 7=BOOT 8=CORE 9=META a=AUTO x=RESET');
 </script>
 
 </body>
