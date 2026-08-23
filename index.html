@@ -88,7 +88,7 @@ body {
   background: rgba(0,0,0,0.3);
   border-radius: 10px;
   padding: 14px;
-  min-height: 100px;
+  min-height: 120px;
   font-size: 13px;
   line-height: 1.6;
   border: 1px solid rgba(255,255,255,0.02);
@@ -134,7 +134,6 @@ body {
 
 <div class="grid">
 
-  <!-- ===== LINKES PANEL: SCHALTUNG ===== -->
   <div class="panel">
     <h2>⚡ SCHALTUNG · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP</h2>
     <button class="gold" onclick="runHelp()">🆘 HELP</button>
@@ -148,7 +147,6 @@ body {
     <div id="output">🔮 Wähle einen Modus oder klicke auf VOLLSCHALTUNG.</div>
   </div>
 
-  <!-- ===== RECHTES PANEL: SICHT ===== -->
   <div class="panel">
     <h2>📐 SICHT · 3×3 · 9×9 · 81 · 243</h2>
     <button onclick="loadView('3x3')">3×3</button>
@@ -178,30 +176,34 @@ body {
 // iki1uc · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP
 // ============================================================
 
+// ===== SETSTATUS =====
+function setStatus(id, value) {
+  document.getElementById(id).textContent = value;
+}
+
+// ===== LOG =====
+function log(msg) {
+  document.getElementById('output').textContent = msg.replace(/\n/g, '\n');
+}
+
 // ===== ZEIT =====
 let time = 0;
 setInterval(() => {
   time++;
   const s = time % 60, m = Math.floor(time / 60);
-  document.getElementById('timeStatus').textContent =
-    `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  setStatus('timeStatus', `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`);
 }, 1000);
-
-// ===== AUSGABE =====
-function log(msg) {
-  document.getElementById('output').textContent = msg;
-}
 
 // ===== 1. HELP =====
 function runHelp() {
   log('🆘 HELP aktiviert\nSoforthilfe · Unterstützung · Fehlerkorrektur\nModus: "sanft" – ich höre zu und helfe.');
-  document.getElementById('agentStatus').textContent = 'HELP';
+  setStatus('agentStatus', 'HELP');
 }
 
 // ===== 2. ERROR =====
 function runError() {
   log('⚠️ ERROR erkannt\nFehler: keiner\nStatus: "klar" – alles sauber.');
-  document.getElementById('agentStatus').textContent = 'ERROR';
+  setStatus('agentStatus', 'ERROR');
 }
 
 // ===== 3. 7SENSE =====
@@ -209,41 +211,47 @@ function runSense() {
   const score = (0.6 + Math.random() * 0.4);
   const klar = score > 0.7;
   log(`👁️ 7SENSE · Wahrnehmung\nScore: ${score.toFixed(2)}\nStatus: ${klar ? '✅ klar' : '🔍 unscharf'}`);
-  document.getElementById('agentStatus').textContent = 'SENSE';
+  setStatus('agentStatus', 'SENSE');
 }
 
 // ===== 4. WRAIGHT =====
 function runWraight() {
-  const erlaubt = Math.random() > 0.3;
-  const status = erlaubt ? '✅ GRÜN – Zugang erlaubt' : '⛔ ROT – Zugang blockiert';
-  log(`✅ WRAIGHT · Erlaubnis\n${status}`);
-  document.getElementById('wraightStatus').textContent = erlaubt ? '✅ GRÜN' : '⛔ ROT';
-  document.getElementById('agentStatus').textContent = 'WRAIGHT';
+  const erlaubt = Math.random() > 0.25;
+  const status = erlaubt ? 'GRÜN – Zugang erlaubt' : 'ROT – Zugang blockiert';
+  log(`✅ WRAIGHT · Erlaubnis\nStatus: ${status}`);
+  setStatus('wraightStatus', erlaubt ? '✅ GRÜN' : '⛔ ROT');
+  setStatus('agentStatus', 'WRAIGHT');
+  return erlaubt;
 }
 
 // ===== 5. COACH =====
 function runCoach() {
-  log('🧑‍🏫 COACH · Führung\nModus: "führend"\nIch führe dich – aber ich werde nicht geführt.\nNächster Schritt: TMP');
-  document.getElementById('coachStatus').textContent = 'aktiv';
-  document.getElementById('agentStatus').textContent = 'COACH';
+  const erlaubt = runWraight();
+  if (!erlaubt) {
+    log('🧑‍🏫 COACH blockiert\nWRAIGHT ist ROT – keine Führung möglich.');
+    setStatus('coachStatus', 'blockiert');
+    return;
+  }
+  log('🧑‍🏫 COACH aktiv\nModus: führend\nIch führe dich – aber ich werde nicht geführt.');
+  setStatus('coachStatus', 'aktiv');
+  setStatus('agentStatus', 'COACH');
 }
 
 // ===== 6. TMP =====
 function runTmp() {
-  log('🌀 TMP · Temporäre Brücke\nModus: "durchfluss"\nTMP leitet weiter – alles stabil.\nNächster Schritt: COACH');
-  document.getElementById('agentStatus').textContent = 'TMP';
+  log('🌀 TMP · Temporäre Brücke\nModus: "durchfluss"\nTMP leitet weiter – alles stabil.');
+  setStatus('agentStatus', 'TMP');
 }
 
 // ===== 7. VOLLSCHALTUNG =====
 function runFull() {
+  const erlaubt = runWraight();
   const help = '🆘 HELP: aktiv (sanft)';
   const error = '⚠️ ERROR: klar (keine Fehler)';
   const sense = `👁️ 7SENSE: klar (${(0.7 + Math.random() * 0.3).toFixed(2)})`;
-  const wraight = Math.random() > 0.2 ? '✅ WRAIGHT: GRÜN – Zugang erlaubt' : '⛔ WRAIGHT: ROT – Zugang blockiert';
-  const coach = wraight.includes('GRÜN') ? '🧑‍🏫 COACH: führend – ich führe, werde nicht geführt' : '🧑‍🏫 COACH: blockiert – warte auf WRAIGHT';
-  const tmp = wraight.includes('GRÜN') ? '🌀 TMP: durchfluss – leitet weiter' : '🌀 TMP: pause – warte auf Korrektur';
-
-  const gesamts = wraight.includes('GRÜN') ? '✅ System aktiv – Führung möglich' : '⛔ System blockiert – Hilfe nötig';
+  const coach = erlaubt ? '🧑‍🏫 COACH: führend' : '🧑‍🏫 COACH: blockiert';
+  const tmp = erlaubt ? '🌀 TMP: durchfluss' : '🌀 TMP: pause';
+  const system = erlaubt ? '✅ System aktiv – Führung möglich' : '⛔ System blockiert – Hilfe nötig';
 
   log(
     '🔮 VOLLSCHALTUNG · HELP · ERROR · 7SENSE · WRAIGHT · COACH · TMP\n' +
@@ -251,52 +259,57 @@ function runFull() {
     help + '\n' +
     error + '\n' +
     sense + '\n' +
-    wraight + '\n' +
+    `✅ WRAIGHT: ${erlaubt ? 'GRÜN' : 'ROT'}\n` +
     coach + '\n' +
     tmp + '\n' +
     '───────────────────────────────────────\n' +
-    '📌 Gesamtstatus: ' + gesamts
+    '📌 Gesamtstatus: ' + system
   );
 
-  document.getElementById('wraightStatus').textContent = wraight.includes('GRÜN') ? '✅ GRÜN' : '⛔ ROT';
-  document.getElementById('coachStatus').textContent = wraight.includes('GRÜN') ? 'führend' : 'blockiert';
-  document.getElementById('agentStatus').textContent = 'VOLLSCHALTUNG';
+  setStatus('wraightStatus', erlaubt ? '✅ GRÜN' : '⛔ ROT');
+  setStatus('coachStatus', erlaubt ? 'führend' : 'blockiert');
+  setStatus('agentStatus', 'VOLLSCHALTUNG');
 }
 
 // ===== RESET =====
 function runReset() {
   log('⟲ RESET\nSystem zurückgesetzt.\nAlle Module sind bereit.');
-  document.getElementById('wraightStatus').textContent = '⏳';
-  document.getElementById('coachStatus').textContent = 'bereit';
-  document.getElementById('agentStatus').textContent = 'bereit';
+  setStatus('wraightStatus', '⏳');
+  setStatus('coachStatus', 'bereit');
+  setStatus('agentStatus', 'bereit');
 }
 
 // ===== SICHT =====
+const views = {
+  '3x3': '3×3 Sicht · 9 Felder · Klare Führung · Einfache Übersicht',
+  '9x9': '9×9 Sicht · 81 Felder · Mittlere Sicht · Für unentschlossene oder komplexe Anfragen',
+  '81': '81er Vollsicht · Alle 81 Felder sichtbar · Buch / Weg-Buch / Option pro Feld',
+  '243': '243er Tiefsicht · Tiefste Optionlichkeiten · Nur wenn absolut notwendig'
+};
+
 function loadView(view) {
-  const out = document.getElementById('viewOutput');
-  const map = {
-    '3x3': '3×3 Sicht · 9 Felder · Klare Führung · Einfache Übersicht',
-    '9x9': '9×9 Sicht · 81 Felder · Mittlere Sicht · Für unentschlossene oder komplexe Anfragen',
-    '81': '81er Vollsicht · Alle 81 Felder sichtbar · Buch / Weg-Buch / Option pro Feld',
-    '243': '243er Tiefsicht · Tiefste Optionlichkeiten · Nur wenn absolut notwendig'
-  };
-  out.textContent = map[view] || 'Unbekannte Sicht';
+  document.getElementById('viewOutput').textContent = views[view] || 'Unbekannte Sicht';
 }
 
 // ===== TASTATUR =====
+const keys = {
+  h: runHelp,
+  e: runError,
+  s: runSense,
+  w: runWraight,
+  c: runCoach,
+  t: runTmp,
+  f: runFull,
+  r: runReset,
+  1: () => loadView('3x3'),
+  2: () => loadView('9x9'),
+  3: () => loadView('81'),
+  4: () => loadView('243')
+};
+
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'h' || e.key === 'H') runHelp();
-  if (e.key === 'e' || e.key === 'E') runError();
-  if (e.key === 's' || e.key === 'S') runSense();
-  if (e.key === 'w' || e.key === 'W') runWraight();
-  if (e.key === 'c' || e.key === 'C') runCoach();
-  if (e.key === 't' || e.key === 'T') runTmp();
-  if (e.key === 'f' || e.key === 'F') runFull();
-  if (e.key === 'r' || e.key === 'R') runReset();
-  if (e.key === '1') loadView('3x3');
-  if (e.key === '2') loadView('9x9');
-  if (e.key === '3') loadView('81');
-  if (e.key === '4') loadView('243');
+  const fn = keys[e.key.toLowerCase()];
+  if (fn) fn();
 });
 
 // ===== INIT =====
