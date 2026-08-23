@@ -111,3 +111,4 @@ module.exports = {
   TMP,
   SCHALTUNG
 };
+SCHALTUNG({ zustand: "notfall", klarheit: 0.2, intuition: 0.3 })
