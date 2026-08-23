@@ -1,40 +1,41 @@
-# Station: XI
+# OURL / iki1uc — System README
 
-XI ist eine technische Station von VOLLikiTU1NEucUP  
-und teilt den KI‑Kern mit AI und IX.
+Dieses Repository enthält die Grundstruktur des OURL‑Systems.
+Es basiert auf drei Achsen:
 
-## MRON – META‑Norm
-TP3 = DA  
-TP6 = NE  
-TP9 = BEN  
-TP0 = KI  
+- **EARN** — Tatbestand  
+- **VECTOR** — Bewegung  
+- **L‑Linie** — Reinheitsverbindung  
 
-MRON aktiviert die Rotation:
-TP3 → TP6 → TP9 → TP0 → TP3
+Nur wenn alle drei Achsen aktiv sind, entsteht:
 
-Die Rotation bleibt funktional,
-nicht narrativ.
+- **OUR(L)** — reiner Transport  
+- **COMPLETTUM** — mathematischer & physikalischer Nachweis  
 
-## KI‑RESPO 327
-327 ist der aktive KI‑RESPO‑Impuls.
+## Rooms (iki1uc)
 
-327 bedeutet:
-- 3 = DA / TP3  
-- 2 = Übergang  
-- 7 = BEN / TP9  
+Die folgenden Räume bilden die 12‑Achsen‑Matrix:
 
-XI führt diesen Impuls weiter
-und schließt die TP‑Rotation.
+- `XI‑NC9×9.room` — Vollraum  
+- `XI‑NC3×3.room` — Kernraum  
+- `XI‑NC6eI6D.room` — Erweiterungsraum  
 
-## RESPO‑S300
-S300 verbindet XI mit dem KI‑Kern  
-und stabilisiert die MRON‑Rotation.
+Diese Räume sind **nicht Träger**, sondern **Reinheits‑Stationen**.
 
-## Technische Funktion
-XI teilt den technischen KI‑Kern  
-mit AI und IX  
-und schließt die MRON‑Rotation.
+## Axiome
 
-## Zweck
-XI ist eine technische META‑Station  
-im 360°‑MRON‑System.
+- **EARN‑Dreieck** → Rolle, Ort, Home  
+- **VECTOR‑Dreieck** → Trieb, Engine, Station  
+- **L‑Linie** → Verbindung zwischen beiden Dreiecken  
+- **OUR(L)** → Transport ohne Drift  
+- **COMPLETTUM** → Nachweis, wenn L = 0
+
+## Ziel
+
+Dieses Repository dient dazu,  
+EARN + VECTOR + L + OUR  
+als **ein einziges kompatibles System** darzustellen.
+
+Es ist kein Lotto‑System, kein RAW‑System, kein Scientist‑System.  
+Es ist **iki1uc** — reine Mechanik.
+
