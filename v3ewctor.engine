@@ -1,0 +1,61 @@
+// v3ewctor.engine.js
+// Vollständiger Motor für VECTOR + QI/IQQ + TMP + arg.sync
+
+// ===== QI + IQQ (Qualität) =====
+function QI(rolle, ort, home) {
+    return rolle + ort + home;
+}
+
+function IQQ(suite, bildung) {
+    return suite + bildung;
+}
+
+// ===== TMP (Führung) =====
+function TMP(qi, iqq) {
+    return (qi + iqq) * 1.333;
+}
+
+// ===== arg.sync (Stabilisierung) =====
+function ARG_SYNC(hin, zurueck) {
+    return (hin + zurueck) / 2;
+}
+
+// ===== VECTOR (Bewegung) =====
+function VECTOR(qi, iqq) {
+    const engine = (qi * 0.6) + (iqq * 0.4);
+    const richtung = qi - iqq;
+    return {
+        engine,
+        richtung,
+        ausgang: engine + richtung
+    };
+}
+
+// ===== v3ewctor.engine (Motor) =====
+function V3EWCTOR_ENGINE(rolle, ort, home, suite, bildung, hin, zurueck) {
+    const qi = QI(rolle, ort, home);
+    const iqq = IQQ(suite, bildung);
+    const tmp = TMP(qi, iqq);
+    const sync = ARG_SYNC(hin, zurueck);
+    const vector = VECTOR(qi, iqq);
+
+    return {
+        typ: "V3EWCTOR_ENGINE",
+        qi,
+        iqq,
+        tmp,
+        sync,
+        vector,
+        motor: (tmp + sync + vector.ausgang) / 3,
+        ausgang: vector.ausgang
+    };
+}
+
+module.exports = {
+    QI,
+    IQQ,
+    TMP,
+    ARG_SYNC,
+    VECTOR,
+    V3EWCTOR_ENGINE
+};
